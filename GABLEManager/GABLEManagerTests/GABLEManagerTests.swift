@@ -10,6 +10,7 @@ import XCTest
 protocol GABLEManagerDelegate {
     func connect()
     func disconnect()
+    func sendData(_ data: Data)
 }
 
 public class GABLEManager: GABLEManagerDelegate {
@@ -22,10 +23,15 @@ public class GABLEManager: GABLEManagerDelegate {
     func disconnect() {
         // Implementation
     }
+    
+    func sendData(_ data: Data) {
+        // Implementation
+    }
 }
 
 class MockGABLEManager: GABLEManagerDelegate {
     var isConnected = false
+    var sentData: Data?
     
     func connect() {
         isConnected = true
@@ -33,6 +39,10 @@ class MockGABLEManager: GABLEManagerDelegate {
     
     func disconnect() {
         isConnected = false
+    }
+    
+    func sendData(_ data: Data) {
+        sentData = data
     }
 }
 
@@ -59,6 +69,13 @@ final class GABLEManagerTests: XCTestCase {
         gaBLEManager.disconnect()
         
         XCTAssertFalse(gaBLEManager.isConnected)
+    }
+    
+    func testSendData() {
+        let testData = "Test Data".data(using: .utf8)!
+        gaBLEManager.sendData(testData)
+        
+        XCTAssertEqual(testData, gaBLEManager.sentData)
     }
 
 }
