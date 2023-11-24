@@ -11,6 +11,7 @@ protocol GABLEManagerDelegate {
     func connect()
     func disconnect()
     func sendData(_ data: Data)
+    func receivedData(_ data: Data) -> Data
 }
 
 public class GABLEManager: GABLEManagerDelegate {
@@ -27,11 +28,17 @@ public class GABLEManager: GABLEManagerDelegate {
     func sendData(_ data: Data) {
         // Implementation
     }
+    
+    func receivedData(_ data: Data) -> Data {
+        // Implementation
+        return data
+    }
 }
 
 class MockGABLEManager: GABLEManagerDelegate {
     var isConnected = false
     var sentData: Data?
+    var receivedData: Data?
     
     func connect() {
         isConnected = true
@@ -43,6 +50,10 @@ class MockGABLEManager: GABLEManagerDelegate {
     
     func sendData(_ data: Data) {
         sentData = data
+    }
+    
+    func receivedData(_ data: Data) -> Data {
+        return data
     }
 }
 
@@ -76,6 +87,13 @@ final class GABLEManagerTests: XCTestCase {
         gaBLEManager.sendData(testData)
         
         XCTAssertEqual(testData, gaBLEManager.sentData)
+    }
+    
+    func testReceivedData() {
+        let testData = "Test Received Data".data(using: .utf8)!
+        let receivedData = gaBLEManager.receivedData(testData)
+        
+        XCTAssertEqual(testData, receivedData)
     }
 
 }
