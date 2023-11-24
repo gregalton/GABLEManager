@@ -8,19 +8,27 @@
 import XCTest
 
 protocol GABLEManagerDelegate {
-    
+    func connect()
 }
 
 public class GABLEManager: GABLEManagerDelegate {
+    var isConnected = false
     
+    func connect() {
+        // Implementation
+    }
 }
 
 class MockGABLEManager: GABLEManagerDelegate {
+    var isConnected = false
     
+    func connect() {
+        isConnected = true
+    }
 }
 
 final class GABLEManagerTests: XCTestCase {
-    var gaBLEManager: GABLEManagerDelegate!
+    var gaBLEManager: MockGABLEManager!
     
     override func setUp() {
         super.setUp()
@@ -32,7 +40,11 @@ final class GABLEManagerTests: XCTestCase {
         super.tearDown()
     }
     
-    
+    func testConnect() {
+        gaBLEManager.connect()
+        
+        XCTAssertTrue(gaBLEManager.isConnected)
+    }
 
 
 }
