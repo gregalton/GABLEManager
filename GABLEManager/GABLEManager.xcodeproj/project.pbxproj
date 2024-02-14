@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		981449B22B7CEECF004AF3A8 /* GABLECentralManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981449AF2B7CEE88004AF3A8 /* GABLECentralManagerProtocol.swift */; };
 		986A548D2B10DE04000AB3A4 /* GABLEManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 986A54842B10DE03000AB3A4 /* GABLEManager.framework */; };
 		986A54932B10DE04000AB3A4 /* GABLEManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 986A54872B10DE03000AB3A4 /* GABLEManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		986A549E2B10E0E9000AB3A4 /* GABLEManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986A549D2B10E0E9000AB3A4 /* GABLEManagerTests.swift */; };
@@ -23,10 +24,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		981449AF2B7CEE88004AF3A8 /* GABLECentralManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GABLECentralManagerProtocol.swift; sourceTree = "<group>"; };
 		986A54842B10DE03000AB3A4 /* GABLEManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GABLEManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		986A54872B10DE03000AB3A4 /* GABLEManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GABLEManager.h; sourceTree = "<group>"; };
 		986A548C2B10DE04000AB3A4 /* GABLEManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GABLEManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		986A549C2B10E0E8000AB3A4 /* GABLEManagerTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GABLEManagerTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		986A549D2B10E0E9000AB3A4 /* GABLEManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GABLEManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -71,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				986A54872B10DE03000AB3A4 /* GABLEManager.h */,
+				981449AF2B7CEE88004AF3A8 /* GABLECentralManagerProtocol.swift */,
 			);
 			path = GABLEManager;
 			sourceTree = "<group>";
@@ -79,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				986A549D2B10E0E9000AB3A4 /* GABLEManagerTests.swift */,
-				986A549C2B10E0E8000AB3A4 /* GABLEManagerTests-Bridging-Header.h */,
 			);
 			path = GABLEManagerTests;
 			sourceTree = "<group>";
@@ -146,6 +147,7 @@
 				TargetAttributes = {
 					986A54832B10DE03000AB3A4 = {
 						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1520;
 					};
 					986A548B2B10DE04000AB3A4 = {
 						CreatedOnToolsVersion = 14.0.1;
@@ -194,6 +196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				981449B22B7CEECF004AF3A8 /* GABLECentralManagerProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +342,7 @@
 		986A54972B10DE04000AB3A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -360,6 +364,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -368,6 +373,7 @@
 		986A54982B10DE04000AB3A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -397,6 +403,7 @@
 		986A549A2B10DE04000AB3A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -421,6 +428,7 @@
 		986A549B2B10DE04000AB3A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
