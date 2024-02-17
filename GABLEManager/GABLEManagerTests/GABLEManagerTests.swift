@@ -6,94 +6,36 @@
 //
 
 import XCTest
-
-protocol GABLEManagerDelegate {
-    func connect()
-    func disconnect()
-    func sendData(_ data: Data)
-    func receivedData(_ data: Data) -> Data
-}
-
-public class GABLEManager: GABLEManagerDelegate {
-    var isConnected = false
-    
-    func connect() {
-        // Implementation
-    }
-    
-    func disconnect() {
-        // Implementation
-    }
-    
-    func sendData(_ data: Data) {
-        // Implementation
-    }
-    
-    func receivedData(_ data: Data) -> Data {
-        // Implementation
-        return data
-    }
-}
-
-class MockGABLEManager: GABLEManagerDelegate {
-    var isConnected = false
-    var sentData: Data?
-    var receivedData: Data?
-    
-    func connect() {
-        isConnected = true
-    }
-    
-    func disconnect() {
-        isConnected = false
-    }
-    
-    func sendData(_ data: Data) {
-        sentData = data
-    }
-    
-    func receivedData(_ data: Data) -> Data {
-        return data
-    }
-}
+import CoreBluetooth
+@testable import GABLEManager
 
 final class GABLEManagerTests: XCTestCase {
-    var gaBLEManager: MockGABLEManager!
     
     override func setUp() {
         super.setUp()
-        gaBLEManager = MockGABLEManager()
+
     }
     
     override func tearDown() {
-        gaBLEManager = nil
         super.tearDown()
     }
     
-    func testConnect() {
-        gaBLEManager.connect()
+    func testWrapperCallsScanForPeripheralsOnManager() {
+        let spy = GABLECentralManagerSpy()
+        let manager = GABLECentralManagerWrapper(centralManager: GABLECentralManagerWrapper(centralManager: spy))
         
-        XCTAssertTrue(gaBLEManager.isConnected)
-    }
-
-    func testDisconnect() {
-        gaBLEManager.disconnect()
+        manager.scanForPeripherals(withServices: nil, options: nil)
         
-        XCTAssertFalse(gaBLEManager.isConnected)
+        XCTAssertTrue(spy.didCallScanForPeripherals)
     }
     
-    func testSendData() {
-        let testData = "Test Data".data(using: .utf8)!
-        gaBLEManager.sendData(testData)
+    func testWrapperCallsStopScanOnManager() {
+        let spy = GABLECentralManagerSpy()
+        let manager = GABLECentralManagerWrapper(centralManager: GABLECentralManagerWrapper(centralManager: spy))
         
-        XCTAssertEqual(testData, gaBLEManager.sentData)
+        manager.stopScan()
+        
+        XCTAssertTrue(spy.didCallStopScan)
     }
     
-    func testReceivedData() {
-        let testData = "Test Received Data".data(using: .utf8)!
-        let receivedData = gaBLEManager.receivedData(testData)
-        
-        XCTAssertEqual(testData, receivedData)
-    }
-
 }
