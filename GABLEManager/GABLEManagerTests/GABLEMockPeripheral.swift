@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class GABLEMockPeripheral: GABLEPeripheralProtocol {
+    var name: String?
+    
+    init(name: String?) {
+        self.name = name
+    }
+}

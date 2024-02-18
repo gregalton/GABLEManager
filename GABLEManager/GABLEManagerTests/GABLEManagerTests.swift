@@ -38,4 +38,17 @@ final class GABLEManagerTests: XCTestCase {
         XCTAssertTrue(spy.didCallStopScan)
     }
     
+    func testWrapperCallsConnectOnManager() {
+        let manager = makeSUT()
+        
+        manager.connect(GABLEMockPeripheral(name: "MockPeripheral"), options: nil)
+        
+        XCTAssertTrue(spy.didCallConnect)
+    }
+    
+    func makeSUT() -> GABLECentralManagerWrapper {
+        let spy = GABLECentralManagerSpy()
+        return GABLECentralManagerWrapper(centralManager: spy)
+    }
+    
 }

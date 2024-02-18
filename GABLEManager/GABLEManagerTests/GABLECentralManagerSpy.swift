@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreBluetooth
+import GABLEManager
 
 class GABLECentralManagerSpy: GABLECentralManagerProtocol {
     var delegate: CBCentralManagerDelegate?
@@ -23,9 +24,12 @@ class GABLECentralManagerSpy: GABLECentralManagerProtocol {
         didCallStopScan = true
     }
     
-    func connect(_ peripheral: CBPeripheral, options: [String: Any]?) {
+    func connect(_ peripheral: GABLEPeripheralProtocol, options: [String: Any]?) {
         didCallConnect = true
-        connectPeripheral = peripheral
+        connectPeripheral = peripheral as? CBPeripheral
     }
 }
+
+//Extension of CBPeripheral is required to allow conformance to GABLEPeripheralProtocol so that both CBPeripheral and GABLEMockPeripheral can be injected into the connect method. CBPeripheral has a private init and can't be mocked directly.
+extension CBPeripheral: GABLEPeripheralProtocol {}
 
