@@ -21,8 +21,7 @@ final class GABLEManagerTests: XCTestCase {
     }
     
     func testWrapperCallsScanForPeripheralsOnManager() {
-        let spy = GABLECentralManagerSpy()
-        let manager = GABLECentralManagerWrapper(centralManager: GABLECentralManagerWrapper(centralManager: spy))
+        let (spy, manager) = makeSUT()
         
         manager.scanForPeripherals(withServices: nil, options: nil)
         
@@ -30,8 +29,7 @@ final class GABLEManagerTests: XCTestCase {
     }
     
     func testWrapperCallsStopScanOnManager() {
-        let spy = GABLECentralManagerSpy()
-        let manager = GABLECentralManagerWrapper(centralManager: GABLECentralManagerWrapper(centralManager: spy))
+        let (spy, manager) = makeSUT()
         
         manager.stopScan()
         
@@ -39,16 +37,17 @@ final class GABLEManagerTests: XCTestCase {
     }
     
     func testWrapperCallsConnectOnManager() {
-        let manager = makeSUT()
+        let (spy, manager) = makeSUT()
         
         manager.connect(GABLEMockPeripheral(name: "MockPeripheral"), options: nil)
         
         XCTAssertTrue(spy.didCallConnect)
     }
     
-    func makeSUT() -> GABLECentralManagerWrapper {
+    private func makeSUT() -> (GABLECentralManagerSpy, GABLECentralManagerWrapper) {
         let spy = GABLECentralManagerSpy()
-        return GABLECentralManagerWrapper(centralManager: spy)
+        let manager = GABLECentralManagerWrapper(centralManager: spy)
+        return (spy, manager)
     }
     
 }
